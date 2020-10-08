@@ -1,0 +1,30 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/rsvp
+
+permissions:
+  - object: /opt/rsvp/deploy_scripts
+    pattern: "*.sh"
+    mode: 777
+    type:
+      - file
+
+hooks:
+  ApplicationStop:
+    - location: deploy_scripts/ApplicationStop.sh
+      timeout: 180
+      runas: root
+  BeforeInstall:
+    - location: deploy_scripts/BeforeInstall.sh
+      timeout: 180
+      runas: root
+  AfterInstall:
+    - location: deploy_scripts/AfterInstall.sh
+      timeout: 180
+      runas: root
+  ApplicationStart:
+    - location: deploy_scripts/ApplicationStart.sh
+      timeout: 180
+      runas: root

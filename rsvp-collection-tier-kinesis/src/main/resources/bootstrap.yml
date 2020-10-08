@@ -1,0 +1,37 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: rsvp-collection-service
+  cloud:
+    config:
+#      uri: http://localhost:9001/
+      uri: http://config-server-ecs-alb-787882846.us-east-1.elb.amazonaws.com/
+      label: develop
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: APPLICATION_ADMIN
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - refresh
+          - info
+          - metrics
+          - env
+          - mappings
+          - beans
+          - shutdown
+          - prometheus
+      base-path: /internal

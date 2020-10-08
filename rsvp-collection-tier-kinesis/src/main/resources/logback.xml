@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+    <property name="LOG_LEVEL" value="DEBUG" />
+
+    <if condition='"${Environment}".equalsIgnoreCase("Prod")'>
+        <then>
+            <property name="LOG_LEVEL" value="ERROR" />
+        </then>
+    </if>
+
+    <if condition='"${Environment}".equalsIgnoreCase("Local")'>
+        <then>
+            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+        </then>
+    </if>
+
+
+    <if condition='"${Environment}".equalsIgnoreCase("qa")'>
+        <then>
+            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+        </then>
+    </if>
+
+    <if condition='"${Environment}".equalsIgnoreCase("Environment_IS_UNDEFINED")'>
+        <then>
+            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+        </then>
+    </if>
+
+    <if condition='property("IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD").equalsIgnoreCase("true")'>
+        <then>
+            <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+                <destination>logcentral.${Environment}.doubledigit-solutions.com:4560</destination>
+                <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                    <providers>
+                        <message/>
+                        <mdc/>
+                        <arguments/>
+                        <threadName/>
+                        <logLevelValue/>
+                        <logLevel/>
+                        <globalCustomFields>
+                            <customFields>
+                                {"app": "config-server", "env": "${Environment}", "source" : "config-server", "tags" : "config-server-${Environment}"}
+                            </customFields>
+                        </globalCustomFields>
+                        <stackTrace>
+                            <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                                <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                                <maxLength>2048</maxLength>
+                                <shortenedClassNameLength>20</shortenedClassNameLength>
+                                <exclude>sun\.reflect\..*\.invoke.*</exclude>
+                                <exclude>net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+                                <rootCauseFirst>true</rootCauseFirst>
+                            </throwableConverter>
+                        </stackTrace>
+                    </providers>
+                </encoder>
+            </appender>
+
+            <logger name="com.ddsolutions.kinesis" level='${LOG_LEVEL}' additivity="false">
+                <appender-ref ref="LOGSTASH" />
+            </logger>
+
+            <logger name="com.amazonaws" level="ERROR" additivity="false">
+                <appender-ref ref="LOGSTASH" />
+            </logger>
+
+            <logger name="org.springframework" level="WARN" additivity="false">
+                <appender-ref ref="LOGSTASH" />
+            </logger>
+
+            <logger name="org.apache" level="WARN" additivity="false">
+                <appender-ref ref="LOGSTASH" />
+            </logger>
+
+            <root level="${LOG_LEVEL}">
+                <appender-ref ref="LOGSTASH" />
+            </root>
+
+        </then>
+        <else>
+            <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>./log/rsvp-collection-service.log</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>./log/rsvp-collection-service.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <maxFileSize>5MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                    <!-- keep N days' worth of history -->
+                    <maxHistory>1</maxHistory>
+                    <totalSizeCap>1GB</totalSizeCap>
+                </rollingPolicy>
+                <encoder>
+                    <charset>UTF-8</charset>
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %level %logger %line %msg %n</pattern>
+                </encoder>
+            </appender>
+
+            <logger name="com.ddsolutions.kinesis" level="DEBUG" additivity="false">
+                <appender-ref ref="FILE" />
+            </logger>
+
+            <logger name="com.amazonaws" level="DEBUG" additivity="false">
+                <appender-ref ref="FILE" />
+            </logger>
+
+            <logger name="org.springframework" level="DEBUG" additivity="false">
+                <appender-ref ref="FILE" />
+            </logger>
+
+            <logger name="org.apache" level="DEBUG" additivity="false">
+                <appender-ref ref="FILE" />
+            </logger>
+
+            <root level="DEBUG">
+                <appender-ref ref="FILE" />
+            </root>
+        </else>
+    </if>
+</configuration>
