@@ -1,0 +1,41 @@
+{
+  "variables": {
+    "region": "us-east-1",
+    "source_ami": "ami-02354e95b39ca8dec"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "profile": "admin",
+      "region": "{{user `region`}}",
+      "instance_type": "t2.small",
+      "source_ami": "{{user `source_ami`}}",
+      "ssh_username": "ec2-user",
+      "ami_name": "ami-codedeploy-java8",
+      "ami_description": "Amazon Linux Image with Codedeploy and java8",
+      "run_tags": {
+        "Name": "packer-builder",
+        "Project": "DoubleDigit-Solutions"
+      },
+      "tags": {
+        "Tool" : "Packer",
+        "Author" : "Vivek",
+        "Name": "Bastion-AMI",
+        "Project": "DoubleDigit-Solutions",
+        "Purpose": "App-Server"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type" : "file",
+      "source" : "./telegraf.conf",
+      "destination" : "/tmp/telegraf.conf"
+    },
+    {
+      "type" : "shell",
+      "script" : "./setup.sh",
+      "execute_command" : "sudo -E -S sh '{{ .Path }}'"
+    }
+  ]
+}
