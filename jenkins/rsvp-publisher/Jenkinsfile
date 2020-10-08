@@ -100,7 +100,7 @@ pipeline {
                         if (apply) {
                             sh "echo creating AWS infra....."
                             unstash "rsvp-stream-publisher-plan"
-                            sh "terraform apply -auto-approve rrsvp-stream-publisher.tfplan"
+                            sh "terraform apply -auto-approve rsvp-stream-publisher.tfplan"
                         }
                     }
                 }
