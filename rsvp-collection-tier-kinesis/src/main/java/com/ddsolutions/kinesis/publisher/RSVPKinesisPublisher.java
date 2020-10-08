@@ -71,10 +71,10 @@ public class RSVPKinesisPublisher {
                         .streamName(streamName)
                         .records(requestEntries)
                         .build();
-//        PutRecordsResponse putRecordsResponse = kinesisClient.putRecords(putRecordsRequest);
-//        if (putRecordsResponse == null || putRecordsResponse.failedRecordCount() > 0) {
-//            LOGGER.error("Failed to publish records...");
-//        }
+        PutRecordsResponse putRecordsResponse = kinesisClient.putRecords(putRecordsRequest);
+        if (putRecordsResponse == null || putRecordsResponse.failedRecordCount() > 0) {
+            LOGGER.error("Failed to publish records...");
+        }
         LOGGER.debug("RSVP event published successfully..");
     }
 }
