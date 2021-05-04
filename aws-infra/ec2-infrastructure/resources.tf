@@ -13,7 +13,7 @@ resource "aws_s3_bucket_object" "ec2-app-package" {
 }
 
 ##################################################################
-#      Application launc template helps us to configure EC2      #
+#      Application launch template helps us to configure EC2      #
 #      instance like, AMI Id, Instance Type, Key-Pair, User-     #
 #      Data, Instance-Profile, EBS etc.                          #
 ##################################################################
