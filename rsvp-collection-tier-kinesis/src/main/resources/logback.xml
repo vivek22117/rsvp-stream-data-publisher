@@ -78,7 +78,6 @@
             <root level="${LOG_LEVEL}">
                 <appender-ref ref="LOGSTASH" />
             </root>
-
         </then>
         <else>
             <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">

@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 public class RSVPKinesisPublisher {
     private static final Logger LOGGER = LoggerFactory.getLogger(RSVPKinesisPublisher.class);
 
-    private KinesisClient kinesisClient;
-    private JsonUtility jsonUtility;
-    private Gson gson;
+    private final KinesisClient kinesisClient;
+    private final JsonUtility jsonUtility;
+    private final Gson gson;
 
     @Value("${stream.name}")
     private String streamName;
