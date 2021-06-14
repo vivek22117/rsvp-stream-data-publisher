@@ -22,10 +22,10 @@ public class AppConfiguration {
     private ApplicationContext applicationContext;
 
     @Value("${isRunningInEC2: No value}")
-    private boolean isRunningInEC2;
+    private String isRunningInEC2;
 
     @Value("${isRunningInLocal: No value}")
-    private boolean isRunningInLocal;
+    private String isRunningInLocal;
 
     @Value("${aws.region: No value for region}")
     private String awsRegion;
@@ -49,9 +49,9 @@ public class AppConfiguration {
 
     private AwsCredentialsProvider getAwsCredentials() {
         if (awsCredentialsProvider == null) {
-            if (isRunningInEC2) {
+            if (Boolean.parseBoolean(isRunningInEC2)) {
                 awsCredentialsProvider = InstanceProfileCredentialsProvider.builder().build();
-            } else if (isRunningInLocal) {
+            } else if (Boolean.parseBoolean(isRunningInLocal)) {
                 awsCredentialsProvider = ProfileCredentialsProvider.builder().profileName("admin").build();
             } else {
                 awsCredentialsProvider = DefaultCredentialsProvider.builder().build();
