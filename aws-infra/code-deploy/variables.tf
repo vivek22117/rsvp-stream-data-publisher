@@ -1,9 +1,4 @@
 #####==============Global Variables=====================#####
-variable "profile" {
-  type        = string
-  description = "AWS Profile name for credentials"
-}
-
 variable "environment" {
   type        = string
   description = "Environment to be configured 'dev', 'qa', 'prod'"

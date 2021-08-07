@@ -84,7 +84,7 @@ resource "aws_iam_policy" "rsvp_code_deploy_policy" {
         "s3:GetObjectVersion"
       ],
       "Effect": "Allow",
-      "Resource": "${data.terraform_remote_state.backend.outputs.artifactory_bucket_arn}/*"
+      "Resource": "${data.terraform_remote_state.s3_buckets.outputs.artifactory_s3_arn}/*"
     }
   ]
 }
