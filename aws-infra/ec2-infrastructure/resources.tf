@@ -6,7 +6,7 @@ data "aws_caller_identity" "current" {}
 
 #####============adding the zip/jar to the defined bucket=================#####
 resource "aws_s3_bucket_object" "ec2-app-package" {
-  bucket = data.terraform_remote_state.backend.outputs.artifactory_bucket_name
+  bucket = data.terraform_remote_state.s3_buckets.outputs.artifactory_s3_name
   key    = var.ec2-webapp-bucket-key
   source = "${path.module}/../../rsvp-collection-tier-kinesis/target/rsvp-collection-tier-kinesis-0.0.1-webapp.zip"
   etag   = filemd5("${path.module}/../../rsvp-collection-tier-kinesis/target/rsvp-collection-tier-kinesis-0.0.1-webapp.zip")
