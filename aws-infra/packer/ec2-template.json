@@ -6,7 +6,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "profile": "admin",
+      "profile": "eks-admin",
       "region": "{{user `region`}}",
       "instance_type": "t2.small",
       "source_ami": "{{user `source_ami`}}",
