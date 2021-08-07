@@ -18,7 +18,8 @@ on:
 
 env:
   tf_version: '0.13.5'
-  tf_working_dir_app: 'aws-infra/ec2-infrastructure/'
+  tf_working_dir_app: './aws-infra/ec2-infrastructure/'
+  maven_dir: './rsvp-collection-tier-kinesis/'
   aws_region: 'us-east-1'
   environment: ${{ github.event.inputs.env }}
 
@@ -40,6 +41,18 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v2
+
+      # Setup JDK8
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+
+      # Build Maven Project
+      - name: Build Maven Project
+        working-directory: ${{ env.maven_dir }}
+        run: mvn clean install -Dintegration-tests.skip=true
 
       #  Configure AWS Credentials using IAM Role
       - name: AWS IAM Assume Role
