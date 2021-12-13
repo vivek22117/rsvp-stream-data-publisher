@@ -1,7 +1,6 @@
 {
   "variables": {
-    "region": "us-east-1",
-    "source_ami": "ami-02354e95b39ca8dec"
+    "region": "us-east-1"
   },
   "builders": [
     {
@@ -9,7 +8,15 @@
       "profile": "eks-admin",
       "region": "{{user `region`}}",
       "instance_type": "t2.small",
-      "source_ami": "{{user `source_ami`}}",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "amzn2-ami-*-ebs",
+          "root-device-type": "ebs"
+        },
+        "owners": ["amazon"],
+        "most_recent": true
+      },
       "ssh_username": "ec2-user",
       "ami_name": "ami-codedeploy-java8",
       "ami_description": "Amazon Linux Image with CodeDeploy and java8",
