@@ -1,6 +1,6 @@
 {
   "variables": {
-    "region": "us-east-1"
+    "ami_name": "ci-cd-node-{{isotime `2006-01-02`}}"
   },
   "builders": [
     {
@@ -25,6 +25,7 @@
         "Project": "DoubleDigit-Solutions"
       },
       "tags": {
+        "CreationDate": "{{isotime `2006-01-02`}}",
         "Tool" : "Packer",
         "Author" : "Vivek",
         "Name": "Bastion-AMI",
