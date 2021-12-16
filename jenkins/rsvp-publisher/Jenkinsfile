@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'qa'
-    }
+    agent any
 
     options {
         preserveStashes(buildCount: 5)
