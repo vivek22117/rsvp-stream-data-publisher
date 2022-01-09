@@ -9,16 +9,15 @@ on:
         default: 'initiate'
       action:
         required: true
-        description: 'create or destroy'
-        default: 'create'
+        description: 'Create or Destroy'
+        default: 'Create'
       env:
         required: true
         description: 'qa or test or prod'
-        default: 'test'
 
 env:
   tf_version: '0.13.5'
-  tf_working_dir_app: 'aws-infra/code-deploy/'
+  tf_working_dir_app: 'aws-infra-deployment/code-deploy-infra/'
   aws_region: 'us-east-1'
   environment: ${{ github.event.inputs.env }}
 
