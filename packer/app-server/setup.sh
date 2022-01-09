@@ -4,7 +4,7 @@ yum update -y
 
 echo "Install java8"
 sudo yum remove -y java
-sudo yum install wget unzip git -y
+sudo yum install wget unzip curl git -y
 sudo amazon-linux-extras install epel -y
 sudo yum-config-manager --enable epel
 sudo yum install -y java-1.8.0-openjdk
