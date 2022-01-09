@@ -59,10 +59,10 @@ function create_rsvp_app_ami() {
       RSVP_APP_AMI_ID=$(aws ec2 describe-images --filters "Name=tag:Name,Values=RSVP-App-Server" --query 'Images[*].ImageId' --region $AWS_REGION --profile default --output text)
 
       if [ -z $RSVP_APP_AMI_ID ]; then
-        echo "Creating AMI named bastion-host-YYYY-MM-DD using packer as it is being used in Terraform script"
+        echo "Creating AMI named rsvp-app-YYYY-MM-DD using packer as it is being used in Terraform script"
 
         cd packer/app-server
-        packer validate bastion-template.json
+        packer validate app-server-template.json
         packer build -var "aws_profile=default" -var "default_region=$AWS_REGION" app-server-template.json
         cd ../..
       else
@@ -93,7 +93,7 @@ if [ $EXEC_TYPE == 'destroy_ami' ]; then
           for ID in $AMI_SNAPSHOT;
           do
             aws ec2 delete-snapshot --snapshot-id $ID --region $AWS_REGION
-            echo ====================== Bastion Host AMI Delete Successfully =============================
+            echo ====================== Server App AMI Delete Successfully =============================
           done
       fi
 
