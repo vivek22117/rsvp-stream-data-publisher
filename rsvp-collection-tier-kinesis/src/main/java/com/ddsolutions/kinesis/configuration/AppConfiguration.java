@@ -52,7 +52,7 @@ public class AppConfiguration {
             if (Boolean.parseBoolean(isRunningInEC2)) {
                 awsCredentialsProvider = InstanceProfileCredentialsProvider.builder().build();
             } else if (Boolean.parseBoolean(isRunningInLocal)) {
-                awsCredentialsProvider = ProfileCredentialsProvider.builder().profileName("admin").build();
+                awsCredentialsProvider = ProfileCredentialsProvider.builder().profileName("default").build();
             } else {
                 awsCredentialsProvider = DefaultCredentialsProvider.builder().build();
             }
