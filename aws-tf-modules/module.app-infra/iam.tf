@@ -51,8 +51,8 @@ resource "aws_iam_policy" "rsvp_collection_policy" {
 	  "Effect": "Allow",
 	  "Resource": [
 	    "arn:aws:s3:::rsvp-records-${var.environment}/*",
-        "arn:aws:s3:::doubledigit-aritifactory-*/*",
-        "arn:aws:s3:::doubledigit-aritifactory-*"
+        "arn:aws:s3:::qa-artifactory-*/*",
+        "arn:aws:s3:::doubledigit-artifactory-*"
 	  ]
 	},
     {
