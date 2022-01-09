@@ -59,3 +59,6 @@ data "template_file" "ec2_user_data" {
     rsvp_app_name      = data.terraform_remote_state.code_deploy_backend.outputs.rsvp_app_name
   }
 }
+
+
+data "aws_caller_identity" "current" {} # used for accessing Account ID and ARN
