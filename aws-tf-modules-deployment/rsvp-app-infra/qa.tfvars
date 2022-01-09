@@ -8,7 +8,7 @@ ec2-webapp-bucket-key = "ec2/codedeploy/rsvp-collection-tier-kinesis-0.0.1-webap
 
 instance_type    = "t3a.small"
 key_name         = "rsvp-processor-key"
-volume_size      = "20"
+volume_size      = "30"
 max_price        = "0.0075"
 instance_tenancy = "default"
 
