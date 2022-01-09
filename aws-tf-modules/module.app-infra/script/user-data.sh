@@ -6,7 +6,6 @@ yum update -y
 sudo yum -y install ruby
 sudo yum install wget unzip curl git -y
 
-#!/bin/bash
 CODEDEPLOY_BIN="/opt/codedeploy-agent/bin/codedeploy-agent"
 $CODEDEPLOY_BIN stop
 yum erase codedeploy-agent -y
