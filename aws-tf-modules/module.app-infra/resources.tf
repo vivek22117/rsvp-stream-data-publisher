@@ -132,10 +132,10 @@ resource "aws_alb_target_group" "rsvp_lb_target_group" {
   health_check {
     enabled             = true
     protocol            = "HTTP"
-    healthy_threshold   = 3
+    healthy_threshold   = 5
     unhealthy_threshold = 10
     timeout             = 5
-    interval            = 10
+    interval            = 30
     path                = var.target_group_path
     matcher             = "200,301,302"
   }
