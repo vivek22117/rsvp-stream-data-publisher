@@ -67,7 +67,7 @@ resource "aws_launch_template" "rsvp_launch_template" {
 
   tag_specifications {
     resource_type = "instance"
-    tags          = merge(local.common_tags, map("Project", "DoubleDigit-Solutions"))
+    tags          = merge(local.common_tags, map("Project", "RSVP-Collection-Tier"))
   }
 }
 

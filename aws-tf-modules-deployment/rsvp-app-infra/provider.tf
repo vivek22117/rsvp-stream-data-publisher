@@ -3,8 +3,7 @@
 ####################################################
 provider "aws" {
   region = var.default_region
-
-  version = ">=2.28.0"
+  #  profile = "default"
 }
 
 
@@ -39,8 +38,12 @@ terraform {
 
 
   backend "s3" {
+    #    profile = "default"
     region  = "us-east-1"
     encrypt = "true"
   }
 
+
 }
+
+data "aws_caller_identity" "current" {} # used for accessing Account ID and ARN
