@@ -17,7 +17,7 @@ on:
 
 env:
   tf_version: '0.13.5'
-  tf_working_dir_app: 'aws-infra-deployment/code-deploy-infra/'
+  tf_working_dir_app: 'aws-tf-modules-deployment/code-deploy-infra/'
   aws_region: 'us-east-1'
   environment: ${{ github.event.inputs.env }}
 
@@ -53,15 +53,14 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform Init For Cloudtrail TF Scripts
+      - name: Terraform Init For CodeDeploy TF Scripts
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: ${{ env.tf_version }}
           tf_actions_working_dir: ${{ env.tf_working_dir_app }}
           tf_actions_subcommand: 'init'
           tf_actions_comment: false
-          args: '-backend-config="backend-config-${{ env.environment }}.config'
-
+          args: '-backend-config="config/${{ env.environment }}-backend-config.config" -backend-config="bucket=${{ env.environment }}-tfstate-${{ env.AWS_ACCOUNT }}-${{ env.AWS_REGION }}"'
 
       - name: 'Terraform Validate'
         uses: hashicorp/terraform-github-actions@master
