@@ -6,8 +6,8 @@ spring:
     name: rsvp-collection-service
   cloud:
     config:
-      uri: http://localhost:9001/
-#      uri: http://config-server-ecs-alb-787882846.us-east-1.elb.amazonaws.com/
+#      uri: http://localhost:9001/
+      uri: http://config-server.cloud-interview.in/
       label: develop
   security:
     user:
