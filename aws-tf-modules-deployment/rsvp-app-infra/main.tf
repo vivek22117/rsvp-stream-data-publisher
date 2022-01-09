@@ -13,7 +13,7 @@ module "app_server" {
   environment = var.environment
   owner_team = var.owner_team
 
-  default_cooldown = var.default_region
+  default_cooldown = var.default_cooldown
   ec2-webapp-bucket-key = var.ec2-webapp-bucket-key
   health_check_port = var.health_check_port
   health_check_type = var.health_check_type
