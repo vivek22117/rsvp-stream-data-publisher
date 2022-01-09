@@ -1,9 +1,4 @@
 #####====================Global Variables===================#####
-variable "profile" {
-  type        = string
-  description = "AWS Profile name for credentials"
-}
-
 variable "environment" {
   type        = string
   description = "Environment to be configured 'dev', 'qa', 'prod'"
@@ -85,11 +80,6 @@ variable "app_instance_name" {
 variable "resource_name_prefix" {
   type        = string
   description = "Application resource name prefix"
-}
-
-variable "ami_id" {
-  type        = string
-  description = "AMI id to create EC2"
 }
 
 variable "instance_type" {
