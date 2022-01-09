@@ -1,7 +1,16 @@
-#############################################
-#      AWS Account details helper           #
-#############################################
-data "aws_caller_identity" "current" {}
+########################################################
+#    Key pair to be used for SSH access                #
+########################################################
+resource "tls_private_key" "app_server_ssh_data" {
+  algorithm = "RSA"
+}
+
+resource "aws_key_pair" "ssh_key" {
+  key_name   = "server-ssh-key"
+  public_key = tls_private_key.app_server_ssh_data.public_key_openssh
+
+  tags = merge(local.common_tags, map("Name", "${var.component_name}-ssh-key"))
+}
 
 
 #####============adding the zip/jar to the defined bucket=================#####
@@ -22,7 +31,7 @@ resource "aws_launch_template" "rsvp_launch_template" {
 
   image_id      = data.aws_ami.ec2_server.id
   instance_type = var.instance_type
-  key_name      = var.key_name
+  key_name      = aws_key_pair.ssh_key.key_name
 
   user_data = base64encode(data.template_file.ec2_user_data.rendered)
 
