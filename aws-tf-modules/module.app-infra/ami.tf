@@ -7,6 +7,6 @@ data "aws_ami" "ec2_server" {
 
   filter {
     name   = "name"
-    values = ["ami-codedeploy-java8"]
+    values = ["rsvp-app-20*"]
   }
 }

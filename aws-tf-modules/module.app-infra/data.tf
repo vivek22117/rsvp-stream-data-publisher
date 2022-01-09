@@ -6,7 +6,7 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
 
   config = {
-    bucket  = "${var.s3_bucket_prefix}-${var.environment}-${var.default_region}"
+    bucket  = "${var.environment}-tfstate-${data.aws_caller_identity.current.account_id}-${var.default_region}"
     key     = "state/${var.environment}/vpc/terraform.tfstate"
     region  = var.default_region
   }
@@ -16,7 +16,7 @@ data "terraform_remote_state" "rsvp_lambda_kinesis" {
   backend = "s3"
 
   config = {
-    bucket  = "${var.s3_bucket_prefix}-${var.environment}-${var.default_region}"
+    bucket  = "${var.environment}-tfstate-${data.aws_caller_identity.current.account_id}-${var.default_region}"
     key     = "state/${var.environment}/lambda/rsvp-lambda-fixed-resources/terraform.tfstate"
     region  = var.default_region
   }
@@ -27,7 +27,7 @@ data "terraform_remote_state" "s3_buckets" {
   backend = "s3"
 
   config = {
-    bucket  = "${var.s3_bucket_prefix}-${var.environment}-${var.default_region}"
+    bucket  = "${var.environment}-tfstate-${data.aws_caller_identity.current.account_id}-${var.default_region}"
     key     = "state/${var.environment}/s3-buckets/terraform.tfstate"
     region  = var.default_region
   }
@@ -37,7 +37,7 @@ data "terraform_remote_state" "code_deploy_backend" {
   backend = "s3"
 
   config = {
-    bucket  = "${var.s3_bucket_prefix}-${var.environment}-${var.default_region}"
+    bucket  = "${var.environment}-tfstate-${data.aws_caller_identity.current.account_id}-${var.default_region}"
     key     = "state/${var.environment}/rsvp-collection-tier/code-deploy/terraform.tfstate"
     region  = var.default_region
   }
