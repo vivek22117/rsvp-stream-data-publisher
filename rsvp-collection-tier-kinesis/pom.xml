@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ddsolutions.kinesis</groupId>
+    <groupId>com.dd.rsvp.stream</groupId>
     <artifactId>rsvp-collection-tier-kinesis</artifactId>
     <name>rsvp-collection-tier-kinesis</name>
     <description>Collection Tier for RSVPs</description>
@@ -19,8 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
-        <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.6.4</spring-boot.version>
+        <spring-cloud.version>2020.0.2</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
-                <version>1.11.797</version>
+                <version>1.12.121</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -230,7 +230,7 @@
                             <Build-Date>${maven.build.timestamp}</Build-Date>
                         </manifestEntries>
                         <manifest>
-                            <mainClass>com.ddsolutions.kinesis.RSVPCollectionAppKinesis</mainClass>
+                            <mainClass>com.dd.rsvp.stream.RSVPCollectionAppKinesis</mainClass>
                             <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
