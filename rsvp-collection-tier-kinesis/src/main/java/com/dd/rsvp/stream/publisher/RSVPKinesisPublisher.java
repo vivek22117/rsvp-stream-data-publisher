@@ -1,8 +1,8 @@
-package com.ddsolutions.kinesis.publisher;
+package com.dd.rsvp.stream.publisher;
 
-import com.ddsolutions.kinesis.domain.RSVPEventRecord;
-import com.ddsolutions.kinesis.utility.GzipUtility;
-import com.ddsolutions.kinesis.utility.JsonUtility;
+import com.dd.rsvp.stream.domain.RSVPEventRecord;
+import com.dd.rsvp.stream.utility.GzipUtility;
+import com.dd.rsvp.stream.utility.JsonUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
-package com.ddsolutions.kinesis.handler;
+package com.dd.rsvp.stream.handler;
 
-import com.ddsolutions.kinesis.publisher.RSVPKinesisPublisher;
+import com.dd.rsvp.stream.publisher.RSVPKinesisPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

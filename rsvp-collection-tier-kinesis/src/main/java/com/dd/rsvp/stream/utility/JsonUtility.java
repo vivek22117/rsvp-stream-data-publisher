@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.utility;
+package com.dd.rsvp.stream.utility;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

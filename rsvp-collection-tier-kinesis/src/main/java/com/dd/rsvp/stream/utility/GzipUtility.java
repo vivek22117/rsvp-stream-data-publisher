@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.utility;
+package com.dd.rsvp.stream.utility;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

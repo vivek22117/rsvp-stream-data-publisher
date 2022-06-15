@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.domain;
+package com.dd.rsvp.stream.domain;
 
 import java.io.Serializable;
 

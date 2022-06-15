@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.controller;
+package com.dd.rsvp.stream.controller;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;

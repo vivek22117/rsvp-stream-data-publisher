@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.utility;
+package com.dd.rsvp.stream.utility;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

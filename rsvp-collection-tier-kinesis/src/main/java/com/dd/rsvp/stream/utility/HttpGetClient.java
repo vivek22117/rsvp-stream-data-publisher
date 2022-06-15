@@ -1,6 +1,6 @@
-package com.ddsolutions.kinesis.utility;
+package com.dd.rsvp.stream.utility;
 
-import com.ddsolutions.kinesis.exception.ApplicationException;
+import com.dd.rsvp.stream.exception.ApplicationException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
