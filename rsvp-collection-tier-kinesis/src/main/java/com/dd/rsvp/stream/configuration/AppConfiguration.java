@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.configuration;
+package com.dd.rsvp.stream.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

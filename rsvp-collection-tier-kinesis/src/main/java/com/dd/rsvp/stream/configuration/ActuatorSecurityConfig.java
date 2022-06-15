@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.configuration;
+package com.dd.rsvp.stream.configuration;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.context.ShutdownEndpoint;

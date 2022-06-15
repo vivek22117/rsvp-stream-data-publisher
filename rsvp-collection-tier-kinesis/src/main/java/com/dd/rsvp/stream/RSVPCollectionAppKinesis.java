@@ -1,6 +1,6 @@
-package com.ddsolutions.kinesis;
+package com.dd.rsvp.stream;
 
-import com.ddsolutions.kinesis.handler.RSVPWebSocketHandler;
+import com.dd.rsvp.stream.handler.RSVPWebSocketHandler;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
