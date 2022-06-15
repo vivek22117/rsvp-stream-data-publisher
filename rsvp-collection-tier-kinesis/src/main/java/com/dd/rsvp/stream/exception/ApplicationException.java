@@ -1,4 +1,4 @@
-package com.ddsolutions.kinesis.exception;
+package com.dd.rsvp.stream.exception;
 
 public class ApplicationException extends RuntimeException {
 
