@@ -1,34 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
-    <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+    <property name="IS_ENVIRONMENT_DEV_QUAL_CERT_OR_PROD" value="false" />
     <property name="LOG_LEVEL" value="DEBUG" />
 
-    <if condition='"${Environment}".equalsIgnoreCase("Prod")'>
+    <if condition='"${IS_ENVIRONMENT_DEV_OR_PROD}".equalsIgnoreCase("prod")'>
         <then>
-            <property name="LOG_LEVEL" value="ERROR" />
+            <property name="LOG_LEVEL" value="DEBUG" />
         </then>
     </if>
 
-    <if condition='"${Environment}".equalsIgnoreCase("Local")'>
+    <if condition='"${IS_ENVIRONMENT_DEV_OR_PROD}".equalsIgnoreCase("qa")'>
         <then>
-            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
+            <property name="LOG_LEVEL" value="DEBUG" />
         </then>
     </if>
 
-
-    <if condition='"${Environment}".equalsIgnoreCase("qa")'>
-        <then>
-            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
-        </then>
-    </if>
-
-    <if condition='"${Environment}".equalsIgnoreCase("Environment_IS_UNDEFINED")'>
-        <then>
-            <property name="IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD" value="false" />
-        </then>
-    </if>
-
-    <if condition='property("IS_ENVIRONMENT_DEVL_QUAL_CERT_OR_PROD").equalsIgnoreCase("true")'>
+    <if condition='property("IS_ENVIRONMENT_DEV_QUAL_CERT_OR_PROD").equalsIgnoreCase("true")'>
         <then>
             <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
                 <destination>logcentral.${Environment}.doubledigit-solutions.com:4560</destination>
