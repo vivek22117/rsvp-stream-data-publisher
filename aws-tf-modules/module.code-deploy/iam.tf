@@ -23,9 +23,9 @@ EOF
 
 #Code deploy access policy
 resource "aws_iam_policy" "rsvp_code_deploy_policy" {
-  name = "RSVPCodeDeployServicePolicy"
+  name        = "RSVPCodeDeployServicePolicy"
   description = "Policy to access AWS Resources"
-  path = "/"
+  path        = "/"
 
   policy = <<EOF
 {
