@@ -14,7 +14,7 @@ resource "aws_key_pair" "ssh_key" {
 
 
 #####============adding the zip/jar to the defined bucket=================#####
-resource "aws_s3_bucket_object" "ec2-app-package" {
+resource "aws_s3_object" "ec2-app-package" {
   bucket = data.terraform_remote_state.s3_buckets.outputs.artifactory_s3_name
   key    = var.ec2-webapp-bucket-key
   source = "${path.module}/../../rsvp-collection-tier-kinesis/target/rsvp-collection-tier-kinesis-0.0.1-webapp.zip"
@@ -184,7 +184,7 @@ resource "aws_autoscaling_group" "rsvp_asg" {
 
 resource "aws_autoscaling_attachment" "attach_rsvp_asg_tg" {
   autoscaling_group_name = aws_autoscaling_group.rsvp_asg.id
-  alb_target_group_arn   = aws_alb_target_group.rsvp_lb_target_group.arn
+  lb_target_group_arn   = aws_alb_target_group.rsvp_lb_target_group.arn
 }
 
 resource "aws_autoscaling_policy" "instance_scaling_up_policy" {

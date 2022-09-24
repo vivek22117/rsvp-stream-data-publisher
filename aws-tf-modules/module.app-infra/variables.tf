@@ -84,7 +84,7 @@ variable "resource_name_prefix" {
 
 variable "instance_type" {
   type        = string
-  description = "Instance type to launc EC2"
+  description = "Instance type to launch EC2"
 }
 
 variable "key_name" {
