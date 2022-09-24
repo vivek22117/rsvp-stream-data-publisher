@@ -26,11 +26,11 @@
       },
       "tags": {
         "CreationDate": "{{isotime `2006-01-02`}}",
-        "Tool" : "Packer",
-        "Author" : "Vivek",
-        "Name": "RSVP-App-Server",
-        "Project": "RSVP-Publisher",
-        "Purpose": "App-Server"
+        "Tool" : "packer",
+        "Author" : "vivek",
+        "Name": "rsvp-app-server",
+        "Project": "rsvp-publisher",
+        "Purpose": "app-server"
       }
     }
   ],
