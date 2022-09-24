@@ -124,6 +124,11 @@ resource "aws_iam_role_policy_attachment" "ec2_policy_role_attach" {
   role       = aws_iam_role.rsvp_collection_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "file_ssm_access_policy" {
+  role       = aws_iam_role.rsvp_collection_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_iam_instance_profile" "rsvp_collection_profile" {
   name = "RSVPCollectionTierProfile"
   role = aws_iam_role.rsvp_collection_role.name
