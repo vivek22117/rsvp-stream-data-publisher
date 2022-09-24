@@ -84,7 +84,7 @@
                 </encoder>
             </appender>
 
-            <logger name="com.ddsolutions.kinesis" level="DEBUG" additivity="false">
+            <logger name="com.dd.rsvp.stream" level="DEBUG" additivity="false">
                 <appender-ref ref="FILE" />
             </logger>
 

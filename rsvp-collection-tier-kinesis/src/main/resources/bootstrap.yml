@@ -6,14 +6,8 @@ spring:
     name: rsvp-collection-service
   cloud:
     config:
-#      uri: http://localhost:9001/
       uri: http://config-server.cloud-interview.in/
       label: develop
-  security:
-    user:
-      name: actuator
-      password: actuator
-      roles: APPLICATION_ADMIN
 
 management:
   endpoint:
