@@ -1,4 +1,4 @@
-owner_team     = "DoubleDigitTeam"
+owner_team     = "DD-Team"
 component_name = "rsvp-processor-app"
 default_region = "us-east-1"
 
