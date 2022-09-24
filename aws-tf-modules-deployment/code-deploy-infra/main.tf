@@ -8,8 +8,8 @@ module "code_deploy_resources" {
 
 
   app_instance_name = var.app_instance_name
-  component_name = var.component_name
+  component_name    = var.component_name
 
   environment = var.environment
-  owner_team = var.owner_team
+  owner_team  = var.owner_team
 }
