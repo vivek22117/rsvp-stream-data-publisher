@@ -7,7 +7,7 @@ echo -e "=======================================================================
 
 
 echo ============================== Reading AWS Default Profile ========================================
-aws configure list --profile default >/dev/null 2>&1
+aws configure list --profile admin >/dev/null 2>&1
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -eq 256 ]; then
@@ -20,7 +20,7 @@ fi
 
 echo -e "\n\n =========================== Fetch AWS Account Id ======================================"
 
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text --profile default)
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text --profile admin)
 if [ -z $AWS_ACCOUNT_ID  ]; then
     echo "Credentials are not valid!"
     exit 1
@@ -56,14 +56,14 @@ function create_rsvp_app_ami() {
 
       echo -e "\n\n ====================== Creating RSVP App AMI using Packer ========================="
       echo "Checking whether AMI exists"
-      RSVP_APP_AMI_ID=$(aws ec2 describe-images --filters "Name=tag:Name,Values=RSVP-App-Server" --query 'Images[*].ImageId' --region $AWS_REGION --profile default --output text)
+      RSVP_APP_AMI_ID=$(aws ec2 describe-images --filters "Name=tag:Name,Values=RSVP-App-Server" --query 'Images[*].ImageId' --region $AWS_REGION --profile admin --output text)
 
       if [ -z $RSVP_APP_AMI_ID ]; then
         echo "Creating AMI named rsvp-app-YYYY-MM-DD using packer as it is being used in Terraform script"
 
         cd packer/app-server
         packer validate app-server-template.json
-        packer build -var "aws_profile=default" -var "default_region=$AWS_REGION" app-server-template.json
+        packer build -var "aws_profile=admin" -var "default_region=$AWS_REGION" app-server-template.json
         cd ../..
       else
         echo "AMI exits with id $RSVP_APP_AMI_ID, now creating VPC resources.."
@@ -84,15 +84,15 @@ fi
 if [ $EXEC_TYPE == 'destroy_ami' ]; then
 
   echo -e "\n\n ========================= =============================== =============================="
-      RSVP_APP_AMI_ID=$(aws ec2 describe-images --filters "Name=tag:Name,Values=RSVP-App-Server" --query 'Images[*].ImageId' --region $AWS_REGION --profile default --output text)
+      RSVP_APP_AMI_ID=$(aws ec2 describe-images --filters "Name=tag:Name,Values=RSVP-App-Server" --query 'Images[*].ImageId' --region $AWS_REGION --profile admin --output text)
 
       if [ ! -z $RSVP_APP_AMI_ID ]; then
           aws ec2 deregister-image --image-id $RSVP_APP_AMI_ID --region $AWS_REGION
 
-          AMI_SNAPSHOT=$(aws ec2 describe-snapshots --owner-ids self --filters Name=tag:Name,Values=RSVP-App-Server --query "Snapshots[*].SnapshotId" --output text --region $AWS_REGION)
+          AMI_SNAPSHOT=$(aws ec2 describe-snapshots --owner-ids self --filters Name=tag:Name,Values=RSVP-App-Server --query "Snapshots[*].SnapshotId" --output text --profile admin --region $AWS_REGION)
           for ID in $AMI_SNAPSHOT;
           do
-            aws ec2 delete-snapshot --snapshot-id $ID --region $AWS_REGION
+            aws ec2 delete-snapshot --snapshot-id $ID --region $AWS_REGION --profile admin
             echo ====================== Server App AMI Delete Successfully =============================
           done
       fi
