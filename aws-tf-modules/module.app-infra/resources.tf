@@ -144,7 +144,7 @@ resource "aws_alb_target_group" "rsvp_lb_target_group" {
 }
 
 resource "aws_autoscaling_group" "rsvp_asg" {
-  depends_on = [aws_s3_bucket_object.ec2-app-package]
+  depends_on = [aws_s3_object.ec2-app-package]
 
   name_prefix         = "rsvp-asg-${var.environment}"
   vpc_zone_identifier = data.terraform_remote_state.vpc.outputs.private_subnets
