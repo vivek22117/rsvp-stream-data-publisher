@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
-    <property name="IS_ENVIRONMENT_DEV_QUAL_CERT_OR_PROD" value="false" />
-    <property name="LOG_LEVEL" value="DEBUG" />
+    <property name="IS_ENVIRONMENT_DEV_QUAL_CERT_OR_PROD" value="false"/>
+    <property name="IS_ROLLING_FILE_APPENDER" value="true"/>
+    <property name="IS_CONSOLE_APPENDER" value="false"/>
+    <property name="LOG_LEVEL" value="DEBUG"/>
 
-    <if condition='"${IS_ENVIRONMENT_DEV_OR_PROD}".equalsIgnoreCase("prod")'>
+    <if condition='"${IS_ROLLING_FILE_APPENDER}".equalsIgnoreCase("true")'>
         <then>
-            <property name="LOG_LEVEL" value="DEBUG" />
+            <property name="LOG_LEVEL" value="DEBUG"/>
         </then>
     </if>
 
-    <if condition='"${IS_ENVIRONMENT_DEV_OR_PROD}".equalsIgnoreCase("qa")'>
+    <if condition='"${Environment}".equalsIgnoreCase("prod")'>
         <then>
-            <property name="LOG_LEVEL" value="DEBUG" />
+            <property name="LOG_LEVEL" value="DEBUG"/>
+        </then>
+    </if>
+
+    <if condition='"${Environment}".equalsIgnoreCase("qa")'>
+        <then>
+            <property name="LOG_LEVEL" value="DEBUG"/>
         </then>
     </if>
 
@@ -29,7 +37,8 @@
                         <logLevel/>
                         <globalCustomFields>
                             <customFields>
-                                {"app": "config-server", "env": "${Environment}", "source" : "config-server", "tags" : "config-server-${Environment}"}
+                                {"app": "config-server", "env": "${Environment}", "source" : "config-server", "tags" :
+                                "config-server-${Environment}"}
                             </customFields>
                         </globalCustomFields>
                         <stackTrace>
@@ -47,26 +56,29 @@
             </appender>
 
             <logger name="com.ddsolutions.kinesis" level='${LOG_LEVEL}' additivity="false">
-                <appender-ref ref="LOGSTASH" />
+                <appender-ref ref="LOGSTASH"/>
             </logger>
 
             <logger name="com.amazonaws" level="ERROR" additivity="false">
-                <appender-ref ref="LOGSTASH" />
+                <appender-ref ref="LOGSTASH"/>
             </logger>
 
             <logger name="org.springframework" level="WARN" additivity="false">
-                <appender-ref ref="LOGSTASH" />
+                <appender-ref ref="LOGSTASH"/>
             </logger>
 
             <logger name="org.apache" level="WARN" additivity="false">
-                <appender-ref ref="LOGSTASH" />
+                <appender-ref ref="LOGSTASH"/>
             </logger>
 
             <root level="${LOG_LEVEL}">
-                <appender-ref ref="LOGSTASH" />
+                <appender-ref ref="LOGSTASH"/>
             </root>
         </then>
-        <else>
+    </if>
+
+    <if condition='property("IS_ROLLING_FILE_APPENDER").equalsIgnoreCase("true")'>
+        <then>
             <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
                 <file>./log/rsvp-collection-service.log</file>
                 <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -85,24 +97,56 @@
             </appender>
 
             <logger name="com.dd.rsvp.stream" level="DEBUG" additivity="false">
-                <appender-ref ref="FILE" />
+                <appender-ref ref="FILE"/>
             </logger>
 
             <logger name="com.amazonaws" level="DEBUG" additivity="false">
-                <appender-ref ref="FILE" />
+                <appender-ref ref="FILE"/>
             </logger>
 
             <logger name="org.springframework" level="DEBUG" additivity="false">
-                <appender-ref ref="FILE" />
+                <appender-ref ref="FILE"/>
             </logger>
 
             <logger name="org.apache" level="DEBUG" additivity="false">
-                <appender-ref ref="FILE" />
+                <appender-ref ref="FILE"/>
             </logger>
 
             <root level="DEBUG">
-                <appender-ref ref="FILE" />
+                <appender-ref ref="FILE"/>
             </root>
-        </else>
+        </then>
+    </if>
+
+    <if condition='property("IS_CONSOLE_APPENDER").equalsIgnoreCase("true")'>
+        <then>
+            <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <Pattern>
+                        %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+                    </Pattern>
+                </layout>
+            </appender>
+
+            <logger name="com.dd.rsvp.stream" level="DEBUG" additivity="false">
+                <appender-ref ref="CONSOLE"/>
+            </logger>
+
+            <logger name="com.amazonaws" level="DEBUG" additivity="false">
+                <appender-ref ref="CONSOLE"/>
+            </logger>
+
+            <logger name="org.springframework" level="DEBUG" additivity="false">
+                <appender-ref ref="CONSOLE"/>
+            </logger>
+
+            <logger name="org.apache" level="DEBUG" additivity="false">
+                <appender-ref ref="CONSOLE"/>
+            </logger>
+
+            <root level="${LOG_LEVEL}">
+                <appender-ref ref="CONSOLE"/>
+            </root>
+        </then>
     </if>
 </configuration>
