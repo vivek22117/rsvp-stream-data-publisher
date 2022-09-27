@@ -4,9 +4,10 @@ import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import com.twitter.clientlib.ApiException;
-import com.twitter.clientlib.api.TweetsApi;
 import com.twitter.clientlib.api.TwitterApi;
-import com.twitter.clientlib.model.*;
+import com.twitter.clientlib.model.AddOrDeleteRulesRequest;
+import com.twitter.clientlib.model.DeleteRulesRequest;
+import com.twitter.clientlib.model.DeleteRulesRequestDelete;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,7 +15,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ public class TweetsStreamHandler {
     private final HttpClient httpClient;
     private final TwitterApi apiInstance;
     private final AWSSecretsManager awsSecretsManager;
-    private final  String bearerToken;
+    private final String bearerToken;
 
     public TweetsStreamHandler(HttpClient httpClient, TwitterApi apiInstance, AWSSecretsManager awsSecretsManager) {
         this.httpClient = httpClient;
