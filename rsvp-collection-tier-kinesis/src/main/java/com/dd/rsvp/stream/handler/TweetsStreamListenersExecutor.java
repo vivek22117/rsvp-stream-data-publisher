@@ -91,7 +91,7 @@ public class TweetsStreamListenersExecutor {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
                 while (isRunning) {
                     line = reader.readLine();
-                    if(line == null || line.isEmpty()) {
+                    if (line == null || line.isEmpty()) {
                         Thread.sleep(100);
                         continue;
                     }
