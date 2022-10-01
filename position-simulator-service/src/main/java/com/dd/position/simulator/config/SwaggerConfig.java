@@ -44,7 +44,7 @@ public class SwaggerConfig {
                         new Info()
                                 .title("Auth API Service")
                                 .contact(contact)
-                                .description("This page documents the Authentication APIs version v1")
+                                .description("This page documents the Position Simulator version v1")
                                 .version("v1"));
     }
 
