@@ -51,7 +51,7 @@ public class RSVPKinesisPublisher {
         List<PutRecordsRequestEntry> requestEntries = rsvpEventRecords.stream()
                 .map(record -> {
                     try {
-                        return jsonUtility.convertToString(rsvpEventRecord);
+                        return jsonUtility.convertToString(record);
                     } catch (JsonProcessingException e) {
                         LOGGER.error("Unable to convert record into json object");
                         return null;
