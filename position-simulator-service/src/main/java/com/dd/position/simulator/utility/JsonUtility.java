@@ -1,4 +1,4 @@
-package com.dd.position.simulator;
+package com.dd.position.simulator.utility;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
