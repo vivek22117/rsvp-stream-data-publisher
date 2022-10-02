@@ -6,7 +6,11 @@ import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Executors;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -32,4 +36,9 @@ public class ApplicationConfig {
         return executor;
     }
 
+    @Bean(name = "ConcurrentTaskExecutor")
+    public TaskExecutor taskExecutor2 () {
+        return new ConcurrentTaskExecutor(
+                Executors.newFixedThreadPool(3));
+    }
 }
