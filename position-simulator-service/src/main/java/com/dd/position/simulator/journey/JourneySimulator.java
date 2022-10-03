@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.Callable;
 
+import static com.dd.position.simulator.utils.PropertyLoaderUtility.getInstance;
+
 public class JourneySimulator implements Runnable {
 
     private final ThreadPoolTaskExecutor threadPool;
@@ -51,7 +53,7 @@ public class JourneySimulator implements Runnable {
                 URL resource = nextFile.getURL();
                 File f = new File(resource.getFile());
                 String vehicleName = VehicleNameUtils.prettifyName(f.getName());
-                Optional<List<String>> vehicleReports = PropertyLoaderUtility.getInstance().getVehiclePositions("/tracks/" + f.getName());
+                Optional<List<String>> vehicleReports = getInstance().getVehiclePositions("/tracks/" + f.getName());
 
                 vehicleReports.ifPresent(value -> {
                     reports.put(vehicleName, value);
