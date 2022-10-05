@@ -1,6 +1,5 @@
 package com.dd.position.simulator.journey;
 
-import com.dd.position.simulator.utils.PropertyLoaderUtility;
 import com.dd.position.simulator.utils.VehicleNameUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -8,7 +7,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -41,7 +39,7 @@ public class JourneySimulator implements Runnable {
     }
 
     /**
-     * Read the data from the resources directory - should work for an executable Jar as
+     * Read the data from the resources' directory - should work for an executable Jar as
      * well as through direct execution
      */
     private Map<String, List<String>> setUpData() {
