@@ -27,7 +27,7 @@ public class JourneySimulator implements Runnable {
     }
 
     private void runVehicleSimulation() {
-        Map<String, List<String>> reports = new HashMap<>();
+        Map<String, List<String>> reports = setUpData();
         boolean stillRunning = true;
         while (stillRunning) {
             List<Callable<Object>> calls = new ArrayList<>();
