@@ -45,7 +45,8 @@ public class Journey implements Callable<Object> {
                         .vehicle(vehicleName)
                         .lat(latitude)
                         .longitude(longitude)
-                        .time(formatter.format(new Date())).build();
+                        .time(formatter.format(new Date()))
+                        .build();
                 listOfPositions.add(position);
 
                 if (listOfPositions.size() == 11) {
