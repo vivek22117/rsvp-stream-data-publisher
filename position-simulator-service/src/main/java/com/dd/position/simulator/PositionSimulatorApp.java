@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import(SwaggerConfig.class)
 public class PositionSimulatorApp {
+
     public static void main(String[] args) {
         SpringApplication.run(PositionSimulatorApp.class, args);
     }
