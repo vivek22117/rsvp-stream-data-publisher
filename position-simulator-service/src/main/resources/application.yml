@@ -1,0 +1,31 @@
+server:
+  port: 9009
+
+spring:
+  main:
+    lazy-initialization: true
+  application:
+    name: position-simulator-service
+  config:
+    import: optional:configserver:http://config-server.cloud-interview.in/
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - refresh
+          - info
+          - metrics
+          - env
+          - mappings
+          - beans
+          - shutdown
+          - prometheus
+      base-path: /internal
