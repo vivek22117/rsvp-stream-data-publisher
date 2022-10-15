@@ -1,5 +1,7 @@
 package com.dd.position.simulator.utils;
 
+import com.dd.position.simulator.PositionSimulatorApp;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
@@ -47,8 +49,7 @@ public class PropertyLoaderUtility {
     public Optional<List<String>> getVehiclePositions(String key) {
         List<String> thisVehicleReports = new ArrayList<>();
         try {
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream inputStream = loader.getResourceAsStream(key);
+            InputStream inputStream = PositionSimulatorApp.class.getResourceAsStream(key);
 
             if (inputStream != null) {
                 Scanner sc = new Scanner(inputStream);
