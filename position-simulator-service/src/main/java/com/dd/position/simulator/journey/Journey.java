@@ -3,6 +3,7 @@ package com.dd.position.simulator.journey;
 import com.dd.position.simulator.journey.model.Position;
 import com.dd.position.simulator.publisher.PositionPublisher;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class Journey implements Callable<Object> {
                 listOfPositions.add(position);
 
                 if (listOfPositions.size() == 11) {
-                    publisher.publish(listOfPositions);
+                    log.debug("positions: " + listOfPositions);
+//                    publisher.publish(listOfPositions);
                 }
             }
         }
