@@ -31,7 +31,7 @@ public class ApplicationConfig {
         return new GsonBuilder().setPrettyPrinting().create();
     }
 
-    @Bean
+    @Bean (name = "threadPoolTaskExecutor")
     public ThreadPoolTaskExecutor createExecutorService() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(corePoolSize);
@@ -42,7 +42,7 @@ public class ApplicationConfig {
         return executor;
     }
 
-    @Bean(name = "ConcurrentTaskExecutor")
+    @Bean(name = "concurrentTaskExecutor")
     public TaskExecutor taskExecutor2() {
         return new ConcurrentTaskExecutor(
                 Executors.newFixedThreadPool(3));
