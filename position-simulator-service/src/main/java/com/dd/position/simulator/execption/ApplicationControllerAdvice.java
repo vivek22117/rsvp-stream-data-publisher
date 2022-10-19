@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -24,15 +23,6 @@ import java.util.*;
 public class ApplicationControllerAdvice {
 
     private final Logger logger = LogManager.getLogger(ApplicationControllerAdvice.class);
-
-    @ExceptionHandler({DataIntegrityViolationException.class})
-    public ResponseEntity<Object> handleConstraintViolation(HttpServletRequest request, DataIntegrityViolationException ex) {
-        logger.error("SQL query data violation, pleas re-check{}\n", request.getRequestURI(), ex);
-
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ApiCallError<>(HttpStatus.BAD_REQUEST, Collections.singletonList(ex.getMessage()), "Failed"));
-    }
 
     @ExceptionHandler(InvalidParameterException.class)
     public ResponseEntity<Object> invalidRegistrationInput(HttpServletRequest request, InvalidParameterException ex) {
