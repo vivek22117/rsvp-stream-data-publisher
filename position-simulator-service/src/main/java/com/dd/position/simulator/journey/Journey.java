@@ -3,7 +3,6 @@ package com.dd.position.simulator.journey;
 import com.dd.position.simulator.journey.model.Position;
 import com.dd.position.simulator.publisher.PositionPublisher;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
