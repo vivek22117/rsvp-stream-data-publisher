@@ -1,11 +1,13 @@
 package com.dd.position.simulator.publisher;
 
 import com.dd.position.simulator.journey.model.Position;
+import com.dd.position.simulator.utils.AWSClientUtil;
 import com.dd.position.simulator.utils.GzipUtility;
 import com.dd.position.simulator.utils.JsonUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
@@ -19,7 +21,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Component
 @Slf4j
 public class PositionPublisher {
 
@@ -32,6 +33,10 @@ public class PositionPublisher {
     public PositionPublisher(KinesisClient kinesisClient, JsonUtility jsonUtility) {
         this.kinesisClient = kinesisClient;
         this.jsonUtility = jsonUtility;
+    }
+
+    public PositionPublisher() {
+        this(AWSClientUtil.createPublisherClient(), new JsonUtility());
     }
 
     public void publish(List<Position> records) throws JsonProcessingException {
